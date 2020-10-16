@@ -9,16 +9,17 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
-
-class Question(db.Question):
+    
+class Quiz(db.Quiz):
     id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(100), unique = False)
     question = db.Column(db.String(100), unique = False)
     answerA = db.Column(db.String(100), unique = False)
     answerB = db.Column(db.String(100), unique = False)
     answerC = db.Column(db.String(100), unique = False)
     answerD = db.Column(db.String(100), unique = False)
-
-    def __init__(self, question, answerOne, answerTwo, answerThree, answerFour):
+    def __init__(self, title, question, answerA, answerB, answerC, answerD):
+        self.title = title
         self.question = question
         self.answerA = answerA
         self.answerB = answerB
@@ -27,7 +28,7 @@ class Question(db.Question):
 
 class QuizSchema(ma.Schema):
     class Meta:
-        fields = ('question', 'answerOne', 'answerTwo', 'answerThree', 'answerFour')
+        fields = ('title', 'question', 'answerA', 'answerB', 'answerC', 'answerD')
 
 quiz_schema = QuizSchema()
 quiz_schema = QuizSchema(many = True)
@@ -35,11 +36,12 @@ quiz_schema = QuizSchema(many = True)
 
 @app.route('/quiz', methods=["POST"])
 def add_quiz():
+    title = request.json['title']
     question = request.json['question']
-    answerA = request.json['year']
-    answerB = request.json['rating']
-    answerC = request.json['genre']
-    answerD = request.json['starring']
+    answerA = request.json['answerA']
+    answerB = request.json['answerB']
+    answerC = request.json['answerC']
+    answerD = request.json['answerD']
     
     new_quiz = Quiz(question, answerA, answerB, answerC, answerD)
 
@@ -48,42 +50,43 @@ def add_quiz():
 
     movie = Quiz.query.get(new_quiz.id)
 
-    return movie_schema.jsonify(movie)
+    return quiz_schema.jsonify(movie)
 
-@app.route("/movies", methods=["GET"])
-def get_movies():
-    all_movies = Movie.query.all()
-    result = movies_schema.dump(all_movies)
+@app.route("/quizzes", methods=["GET"])
+def get_quizzes():
+    all_quizzes = Quiz.query.all()
+    result = quiz_schema.dump(all_quizzes)
     return jsonify(result)
 
-@app.route("/movie/<id>", methods=["GET"])
-def get_movie(id):
-    movie = Movie.query.get(id)
-    return movie_schema.jsonify(movie)
+@app.route("/quizzes/<id>", methods=["GET"])
+def get_quiz(id):
+    movie = Quiz.query.get(id)
+    return Quiz_schema.jsonify(quiz)
 
-@app.route("/movie/<id>", methods =["PUT"])
-def movie_update(id):
-    movie = Movie.query.get(id)
-    title = request.json['title']
-    year = request.json['year']
-    rating = request.json['rating']
-    genre= request.json['genre']
-    starring = request.json['starring']
-    movie.title = title
-    movie.year = year
-    movie.rating = rating
-    movie.genre = genre
-    movie.starring = starring
+@app.route("/quizzes/<id>", methods =["PUT"])
+def quiz_update(id):
+    title = Quiz.query.get(id)
+    question = request.json['question']
+    answerA = request.json['year']
+    answerB = request.json['rating']
+    answerC = request.json['genre']
+    answerD = request.json['starring']
+    quiz.title = title
+    quiz.question = question
+    quiz.answerA = answerA
+    quiz.answerB = answerB
+    quiz.answerC = answerC
+    quiz.answerD = answerD
 
-@app.route("/movie/<id>", methods =["DELETE"])
-def movie_delete(id):
-    guide = Guide.query.get(id)
-    db.session.delete(movie)
+@app.route("/quiz/<id>", methods =["DELETE"])
+def quiz_delete(id):
+    quiz = Quiz.query.get(id)
+    db.session.delete(quiz)
     db.session.commit()
-    return movie_schema.jsonify(movie)
+    return quiz_schema.jsonify(quiz)
 
     db.session.commit()
-    return movie_schema.jsonify(movie)
+    return quiz_schema.jsonify(quiz)
 
 
 if __name__ == '__main__':
