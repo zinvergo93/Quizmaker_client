@@ -16,7 +16,7 @@ Activity
 Jayden - Main/Results
 Evalyn - Add/Take quiz pages
 
-Cory - Quiz creation
+10- 4 Cory - Quiz creation 
 Boli - results
 quizizz.com
 
