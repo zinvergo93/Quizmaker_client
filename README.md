@@ -16,10 +16,8 @@ Activity
 
 Jayden - Main/Results - Jayden Read
 Evalyn - Add/Take quiz pages - I read this -Evalyn
-
-
-Cory - Quiz creation
+10- 4 Cory - Quiz creation
 Boli - results (boli wuz here)
-quizizz.com
+
 
 
