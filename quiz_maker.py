@@ -13,6 +13,14 @@ ma = Marshmallow(app)
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), unique = False)
+    questions = db.relationship('Question', backref = 'quiz', lazy = True)
+    
+    def __init__(self, title):
+        self.title = title
+
+class Question(db.Model):    
+    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
     question = db.Column(db.String(100), unique=False)
     answer_a = db.Column(db.String(100), unique=False)
     answer_b = db.Column(db.String(100), unique=False)
@@ -29,7 +37,7 @@ class Quiz(db.Model):
 
 class QuizSchema(ma.Schema):
     class Meta:
-        fields = ('question', 'answer_a', 'answer_b', 'answer_c', 'answer_d')
+        fields = ({'title', ['question', 'answer_a', 'answer_b', 'answer_c', 'answer_d']})
 
 
 quiz_schema = QuizSchema()
@@ -38,13 +46,14 @@ quizes_schema = QuizSchema(many=True)
 
 @app.route('/quiz', methods=["POST"])
 def add_quiz():
+    title = request.json['title']
     question = request.json['question']
     answer_a = request.json['answer_a']
     answer_b = request.json['answer_b']
     answer_c = request.json['answer_c']
     answer_d = request.json['answer_d']
 
-    new_quiz = Quiz(question, answer_a, answer_b, answer_c, answer_d)
+    new_quiz = Quiz({title: [question, answer_a, answer_b, answer_c, answer_d]})
 
     db.session.add(new_quiz)
     db.session.commit()
@@ -70,12 +79,14 @@ def get_quiz(id):
 @app.route("/quiz/<id>", methods=["PUT"])
 def quiz_update(id):
     quiz = Quiz.query.get(id)
+    title = request.json['title']
     question = request.json['question']
     answer_a = request.json['a']
     answer_b = request.json['b']
     answer_c = request.json['c']
     answer_d = request.json['d']
 
+    quiz.title = title
     quiz.question = question
     quiz.answer_a = answer_a
     quiz.answer_b = answer_b
