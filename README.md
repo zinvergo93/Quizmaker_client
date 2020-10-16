@@ -13,10 +13,11 @@ Activity
 >Results page: A box "You scored x/10 questions correctly; which is **%", back to main page button.
 
 
-Jayden - Main/Results
-Evalyn - Add/Take quiz pages
 
-10- 4 Cory - Quiz creation 
-Boli - results
-quizizz.com
+Jayden - Main/Results - Jayden Read
+Evalyn - Add/Take quiz pages - I read this -Evalyn
+10- 4 Cory - Quiz creation
+Boli - results (boli wuz here)
+
+
 
