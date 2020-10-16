@@ -14,9 +14,11 @@ Activity
 
 
 Jayden - Main/Results
-Evalyn - Add/Take quiz pages
+Evalyn - Add/Take quiz pages 
 
 Cory - Quiz creation
 Boli - results
 quizizz.com
 
+
+I read this -Evalyn
