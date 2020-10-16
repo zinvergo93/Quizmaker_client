@@ -6,12 +6,12 @@ import os
 app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'quiz_maker.sqlite')
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
 
-class Quiz(db.Quiz):
+class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question = db.Column(db.String(100), unique=False)
     answer_a = db.Column(db.String(100), unique=False)
