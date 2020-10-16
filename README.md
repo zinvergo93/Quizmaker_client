@@ -17,7 +17,7 @@ Jayden - Main/Results
 Evalyn - Add/Take quiz pages
 
 Cory - Quiz creation
-Boli - results
+Boli - results (boli wuz here)
 quizizz.com
 
 
