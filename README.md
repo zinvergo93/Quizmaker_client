@@ -1,7 +1,6 @@
 # QUIZ MAKER CLASS PROJECT
 
-## ADD ALL COMMIT MESSAGES, LOG TIME, INITIAL EACH COMMIT IN =>
-### COMMIT_EDITMSG in the .git folder!!!
+### Newest commit is logged in COMMIT_EDITMSG in the .git folder!!!
 
 Diagrams
 Class
