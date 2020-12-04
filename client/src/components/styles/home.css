@@ -1,0 +1,15 @@
+h1 {
+  font-size: 5em;
+  color: navy;
+}
+
+p {
+  display: grid;
+  justify-content: center;
+  font-size: 1.5em;
+  color: darkblue;
+}
+
+button {
+  color: darkblue;
+}
