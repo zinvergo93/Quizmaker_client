@@ -11,7 +11,7 @@ import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
 import QuestionIcon from "@material-ui/icons/Help";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
@@ -25,7 +25,7 @@ const Navbar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="primary" position="absolute">
+      <AppBar color="primary" position="absolute">
         <Toolbar variant="dense">
           <Grid container justify="space-between">
             <Grid item />
