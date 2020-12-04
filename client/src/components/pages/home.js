@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function () {
   return (
@@ -10,12 +11,12 @@ export default function () {
       </p>
       <div className="right-column">
         <div className="take-a-quiz">
-          <div className="add-a-quiz">
-            <button>Take a Quiz</button>
+          <div className="quiz-links">
+            <Link to="/takequiz">Take a Quiz</Link>
           </div>
 
-          <div className="Add-a-Quiz">
-            <button>Add a Quiz</button>
+          <div className="quiz-links">
+            <Link to="/addquiz">Add a Quiz</Link>
           </div>
         </div>
       </div>
